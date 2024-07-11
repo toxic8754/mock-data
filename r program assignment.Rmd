@@ -1,0 +1,56 @@
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(summarytools)
+```
+
+```{r}
+str(MOCK_DATA)
+head(MOCK_DATA)
+summary(MOCK_DATA)
+dfSummary(MOCK_DATA)
+```
+
+```{r}
+missing_values <- sapply(MOCK_DATA, function(x) sum(is.na(x)))
+missing_values
+```
+
+```{r}
+# Visualize the data
+# Histogram for numerical variables
+num_vars <- sapply(MOCK_DATA, is.numeric)
+num_data <- MOCK_DATA[, num_vars]
+```
+
+```{r}
+# boxplot
+ggplot(MOCK_DATA, aes(x =stock_high, y =stock_low)) +
+  geom_boxplot(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Boxplot of Humidity by Season", x= "stock_high", y= "stock_low")
+```
+```{r}
+# boxplot
+ggplot(MOCK_DATA, aes(x =stock_name, y =stock_price)) +
+  geom_boxplot(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Boxplot of Humidity by Season", x= "stockname", y= "stockprice")
+```
+
+```{r}
+# Scatter plot to show the relationship between two numeric variables (replace 'temp' and 'humidity' with appropriate column names)
+ggplot(MOCK_DATA, aes(x = stock_name, y = stock_price)) +
+  geom_point(color = "red") +
+  theme_minimal() +
+  labs(title = "Scatter Plot of Temperature vs Humidity", x = "stockname", y = "stockprice")
+```
+
+```{r}
+# Time series plot for a variable over time (replace 'date' and 'temp' with appropriate column names)
+ggplot(MOCK_DATA, aes(x = stock_name, y = stock_price)) +
+  geom_line(color = "darkgreen") +
+  theme_minimal() +
+  labs(title = "Time Series of Temperature", x = "stockname", y = "stockprice")
+```
